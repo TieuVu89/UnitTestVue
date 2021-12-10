@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import { shallowMount } from "@vue/test-utils";
-
 import GetData from "@/components/GetData";
 import moxios from "moxios";
 
@@ -21,10 +20,10 @@ describe("test async", () => {
     let wrapper = shallowMount(GetData);
     moxios.stubRequest("/user", {
       status: 200,
-      data: { user: "DoanTC" },
+      response: { user: "DoanTC" },
     });
     moxios.wait(() => {
-      expect(wrapper.find("#app").text()).to.be.match(/TC/);
+      expect(wrapper.find("#app").text()).to.be.contain("DoanTC");
       done();
     });
   });
